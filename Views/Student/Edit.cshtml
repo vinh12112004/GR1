@@ -1,0 +1,26 @@
+@model GR1.Models.StudentModel
+
+@{
+    ViewData["Title"] = "Chỉnh sửa sinh viên";
+}
+
+<h2 class="mt-4 mb-4">Chỉnh sửa sinh viên</h2>
+
+<form asp-action="Edit" method="post" class="needs-validation" novalidate>
+    <div class="form-group mb-3">
+        <label for="StudentCode" class="form-label">Mã sinh viên</label>
+        <input asp-for="StudentCode" class="form-control" readonly />
+        <span asp-validation-for="StudentCode" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label for="FullName" class="form-label">Tên sinh viên</label>
+        <input asp-for="FullName" class="form-control" />
+        <span asp-validation-for="FullName" class="text-danger"></span>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-primary">Cập nhật</button>
+        <a href="@Url.Action("Index", "Student")" class="btn btn-secondary">Hủy</a>
+    </div>
+</form>
+
+

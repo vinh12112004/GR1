@@ -1,0 +1,39 @@
+@model IEnumerable<GR1.Models.LogModel>
+
+@{
+    ViewData["Title"] = "Lịch sử vào/ra";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">Lịch sử vào/ra</h2>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Mã sinh viên</th>
+                    <th scope="col">Mã phòng</th>
+                    <th scope="col">Thời gian</th>
+                    <th scope="col">Trạng thái</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var log in Model)
+                {
+                    <tr>
+                        <td>@log.StudentCode</td>
+                        <td>@log.RoomCode</td>
+                        <td>@log.Timestamp.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                        <td>
+                            <span class="badge @(log.Status=="IN" ? "bg-success" : "bg-danger")">
+                                @log.Status
+                            </span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <a asp-controller="Student" asp-action="Index" class="btn btn-secondary mt-3">Quay lại</a>
+</div>

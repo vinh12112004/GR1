@@ -1,0 +1,23 @@
+@model GR1.Models.StudentModel
+
+@{
+    ViewData["Title"] = "Thêm sinh viên";
+}
+
+<h2 class="mt-4 mb-4">Thêm sinh viên</h2>
+
+<form asp-action="Create" method="post" class="card p-4 shadow-sm" style="max-width: 500px;">
+    <div class="mb-3">
+        <label asp-for="StudentCode" class="form-label">Mã SV</label>
+        <input asp-for="StudentCode" class="form-control" />
+        <span asp-validation-for="StudentCode" class="text-danger"></span>
+    </div>
+    
+    <div class="mb-3">
+        <label asp-for="FullName" class="form-label">Họ tên</label>
+        <input asp-for="FullName" class="form-control" />
+        <span asp-validation-for="FullName" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">💾 Lưu</button>
+</form>
