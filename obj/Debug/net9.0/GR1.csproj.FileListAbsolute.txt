@@ -204,3 +204,4 @@ D:\GR1\GR1\bin\Debug\net9.0\GR1.dll
 D:\GR1\GR1\bin\Debug\net9.0\GR1.pdb
 D:\GR1\GR1\obj\Debug\net9.0\GR1.genruntimeconfig.cache
 D:\GR1\GR1\obj\Debug\net9.0\ref\GR1.dll
+D:\GR1\GR1\obj\Debug\net9.0\GR1.sourcelink.json

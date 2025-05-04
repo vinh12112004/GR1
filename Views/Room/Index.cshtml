@@ -1,0 +1,36 @@
+@model IEnumerable<GR1.Models.RoomModel>
+@{
+    ViewData["Title"] = "Danh sách phòng";
+    var studentCounts = ViewBag.StudentCounts as Dictionary<int, int>; // hoặc string nếu RoomCode là string
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">@ViewData["Title"]</h2>
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover table-bordered align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">Mã phòng</th>
+                            <th scope="col">Số sinh viên hiện tại</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var room in Model)
+                        {
+                            <tr>
+                                <td>@room.RoomCode</td>
+                                <td>@(studentCounts != null && studentCounts.ContainsKey(room.RoomCode) ? studentCounts[room.RoomCode] : 0)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <!-- Optional: Add any custom JavaScript if needed -->
+}

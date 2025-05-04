@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer("Data Source=localhost,1433; User ID=SA; Password=Password123;Encrypt=False;"));
+    options.UseSqlServer("Data Source=localhost; User ID=SA; Password=123456;Encrypt=False;"));
 
 var app = builder.Build();
 

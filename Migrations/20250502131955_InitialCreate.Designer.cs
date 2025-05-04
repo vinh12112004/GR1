@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GR1.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250423173753_InitialCreate")]
+    [Migration("20250502131955_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -36,6 +36,9 @@ namespace GR1.Migrations
                     b.Property<DateTime>("Timestamp")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("ID")
+                        .HasColumnType("int");
+
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -45,22 +48,6 @@ namespace GR1.Migrations
                     b.HasIndex("RoomCode");
 
                     b.ToTable("Logs");
-
-                    b.HasData(
-                        new
-                        {
-                            StudentCode = 20225779L,
-                            RoomCode = 101,
-                            Timestamp = new DateTime(2023, 1, 1, 1, 0, 0, 0, DateTimeKind.Unspecified),
-                            Status = "IN"
-                        },
-                        new
-                        {
-                            StudentCode = 20225780L,
-                            RoomCode = 102,
-                            Timestamp = new DateTime(2023, 1, 1, 2, 0, 0, 0, DateTimeKind.Unspecified),
-                            Status = "OUT"
-                        });
                 });
 
             modelBuilder.Entity("GR1.Models.RoomModel", b =>
@@ -74,16 +61,6 @@ namespace GR1.Migrations
                     b.HasKey("RoomCode");
 
                     b.ToTable("Rooms");
-
-                    b.HasData(
-                        new
-                        {
-                            RoomCode = 101
-                        },
-                        new
-                        {
-                            RoomCode = 102
-                        });
                 });
 
             modelBuilder.Entity("GR1.Models.StudentModel", b =>
@@ -98,18 +75,6 @@ namespace GR1.Migrations
                     b.HasKey("StudentCode");
 
                     b.ToTable("Students");
-
-                    b.HasData(
-                        new
-                        {
-                            StudentCode = 20225779L,
-                            FullName = "Nguyen Van A"
-                        },
-                        new
-                        {
-                            StudentCode = 20225780L,
-                            FullName = "Le Thi B"
-                        });
                 });
 
             modelBuilder.Entity("GR1.Models.LogModel", b =>

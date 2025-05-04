@@ -3,8 +3,6 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
-
 namespace GR1.Migrations
 {
     /// <inheritdoc />
@@ -44,6 +42,7 @@ namespace GR1.Migrations
                     StudentCode = table.Column<long>(type: "bigint", nullable: false),
                     RoomCode = table.Column<int>(type: "int", nullable: false),
                     Timestamp = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ID = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -61,33 +60,6 @@ namespace GR1.Migrations
                         principalTable: "Students",
                         principalColumn: "StudentCode",
                         onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.InsertData(
-                table: "Rooms",
-                column: "RoomCode",
-                values: new object[]
-                {
-                    101,
-                    102
-                });
-
-            migrationBuilder.InsertData(
-                table: "Students",
-                columns: new[] { "StudentCode", "FullName" },
-                values: new object[,]
-                {
-                    { 20225779L, "Nguyen Van A" },
-                    { 20225780L, "Le Thi B" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Logs",
-                columns: new[] { "RoomCode", "StudentCode", "Timestamp", "Status" },
-                values: new object[,]
-                {
-                    { 101, 20225779L, new DateTime(2023, 1, 1, 1, 0, 0, 0, DateTimeKind.Unspecified), "IN" },
-                    { 102, 20225780L, new DateTime(2023, 1, 1, 2, 0, 0, 0, DateTimeKind.Unspecified), "OUT" }
                 });
 
             migrationBuilder.CreateIndex(

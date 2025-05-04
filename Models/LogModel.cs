@@ -4,6 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace GR1.Models;
 public class LogModel
 {
+    [Key]
+    public int ID { get; set; }
+    
     [ForeignKey("Student")]
     [Display(Name = "Mã sinh viên")]
     public long StudentCode { get; set; }

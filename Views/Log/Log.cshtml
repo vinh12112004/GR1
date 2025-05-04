@@ -5,35 +5,65 @@
 }
 
 <div class="container mt-5">
-    <h2 class="mb-4">Lịch sử vào/ra</h2>
+    <h2 class="mb-4">@ViewData["Title"]</h2>
 
-    <div class="table-responsive">
-        <table class="table table-bordered table-striped align-middle">
-            <thead class="table-dark">
-                <tr>
-                    <th scope="col">Mã sinh viên</th>
-                    <th scope="col">Mã phòng</th>
-                    <th scope="col">Thời gian</th>
-                    <th scope="col">Trạng thái</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var log in Model)
-                {
-                    <tr>
-                        <td>@log.StudentCode</td>
-                        <td>@log.RoomCode</td>
-                        <td>@log.Timestamp.ToString("dd/MM/yyyy HH:mm:ss")</td>
-                        <td>
-                            <span class="badge @(log.Status=="IN" ? "bg-success" : "bg-danger")">
-                                @log.Status
-                            </span>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+    <!-- Search Form -->
+    <form method="get" asp-action="Index" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="StudentCode" class="form-control" placeholder="Tìm mã sinh viên..." aria-label="Tìm kiếm mã sinh viên" />
+            <button type="submit" class="btn btn-primary">Tìm</button>
+            <a href="@Url.Action("Index", "Log")" class="btn btn-secondary ms-2">Xóa tìm kiếm</a>
+        </div>
+    </form>
+
+    <!-- Card for Table -->
+    <div class="card shadow-sm">
+        <div class="card-body">
+            @if (!Model.Any())
+            {
+                <div class="alert alert-info text-center" role="alert">
+                    Hiện tại không có lịch sử vào/ra nào.
+                </div>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover table-bordered align-middle">
+                        <thead class="table-dark">
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Mã sinh viên</th>
+                                <th scope="col">Mã phòng</th>
+                                <th scope="col">Thời gian</th>
+                                <th scope="col">Trạng thái</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var log in Model)
+                            {
+                                <tr>
+                                    <td>@log.ID</td>
+                                    <td>@log.StudentCode</td>
+                                    <td>@log.RoomCode</td>
+                                    <td>@log.Timestamp.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                                    <td>
+                                        <span class="badge @(log.Status == "IN" ? "bg-success" : "bg-danger")">
+                                            @(log.Status == "IN" ? "Vào" : "Ra")
+                                        </span>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
     </div>
 
-    <a asp-controller="Student" asp-action="Index" class="btn btn-secondary mt-3">Quay lại</a>
+    <!-- Back Button -->
+    <a asp-controller="Student" asp-action="Index" class="btn btn-secondary mt-4">Quay lại</a>
 </div>
+
+@section Scripts {
+    <!-- Optional: Add custom JavaScript if needed -->
+}
