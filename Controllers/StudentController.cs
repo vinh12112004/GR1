@@ -14,7 +14,7 @@ public class StudentController : Controller
 
     public async Task<IActionResult> Index()
     {
-        var list = await _context.Students.Take(10).ToListAsync();
+        var list = await _context.Students.ToListAsync();
         return View(list);
     }
 
@@ -27,10 +27,10 @@ public class StudentController : Controller
                 students = students.Where(s=> s.StudentCode.ToString().Contains(StudentCodeorFullName) || s.FullName.Contains(StudentCodeorFullName));
                 if (students != null)
                 {
-                    return View(await students.Take(10).ToListAsync());
+                    return View(await students.ToListAsync());
                 }
             }
-            var top10 = await students.Take(10).ToListAsync();
+            var top10 = await students.ToListAsync();
             return View(top10);
         }
         catch (DbUpdateException ex)

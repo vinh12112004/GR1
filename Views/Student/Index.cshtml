@@ -58,3 +58,20 @@
     </div>
 </div>
 
+<style>
+    /* Đảm bảo bảng có thanh cuộn dọc */
+    .table-responsive {
+        max-height: 500px; /* Chiều cao tối đa của bảng */
+        overflow-y: auto; /* Thanh cuộn dọc */
+        position: relative; /* Giữ header cố định */
+    }
+
+    /* Cố định header bảng */
+    .table thead th {
+        position: sticky;
+        top: 0;
+        background: #343a40; /* Màu nền của header */
+        color: white;
+        z-index: 1;
+    }
+</style>

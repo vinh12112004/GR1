@@ -1,5 +1,6 @@
 using GR1.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +8,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer("Data Source=localhost; User ID=SA; Password=123456;Encrypt=False;"));
+
+// Configure authentication
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Auth/Login";
+        options.LogoutPath = "/Auth/Logout";
+    });
 
 var app = builder.Build();
 
@@ -32,8 +41,10 @@ using (var scope = app.Services.CreateScope())
     context.Database.ExecuteSqlRaw("ALTER TABLE Logs WITH CHECK CHECK CONSTRAINT ALL");
 }
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();
@@ -42,6 +53,5 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Student}/{action=Index}/{id?}")
     .WithStaticAssets();
-
 
 app.Run();

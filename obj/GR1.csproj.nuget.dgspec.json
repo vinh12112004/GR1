@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\GR1\\gr1\\GR1.csproj": {}
+    "D:\\GR1\\GR1\\GR1.csproj": {}
   },
   "projects": {
-    "D:\\GR1\\gr1\\GR1.csproj": {
+    "D:\\GR1\\GR1\\GR1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\GR1\\gr1\\GR1.csproj",
+        "projectUniqueName": "D:\\GR1\\GR1\\GR1.csproj",
         "projectName": "GR1",
-        "projectPath": "D:\\GR1\\gr1\\GR1.csproj",
+        "projectPath": "D:\\GR1\\GR1\\GR1.csproj",
         "packagesPath": "C:\\Users\\vinh1\\.nuget\\packages\\",
-        "outputPath": "D:\\GR1\\gr1\\obj\\",
+        "outputPath": "D:\\GR1\\GR1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\vinh1\\AppData\\Roaming\\NuGet\\NuGet.Config"

@@ -5,6 +5,7 @@ namespace GR1.Models;
 public class LogModel
 {
     [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int ID { get; set; }
     
     [ForeignKey("Student")]
