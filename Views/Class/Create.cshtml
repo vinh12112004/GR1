@@ -1,0 +1,32 @@
+@model GR1.Models.ClassModel
+
+@{
+    ViewData["Title"] = "Thêm lớp học";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">@ViewData["Title"]</h2>
+    <form asp-action="Create" method="post" class="card p-4 shadow-sm" style="max-width: 500px;">
+        <div class="mb-3">
+            <label asp-for="ClassName" class="form-label">Tên lớp</label>
+            <input asp-for="ClassName" class="form-control" />
+            <span asp-validation-for="ClassName" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Room" class="form-label">Phòng học</label>
+            <input asp-for="Room" class="form-control" />
+            <span asp-validation-for="Room" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="StartTime" class="form-label">Thời gian bắt đầu</label>
+            <input asp-for="StartTime" type="datetime-local" class="form-control" />
+            <span asp-validation-for="StartTime" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="EndTime" class="form-label">Thời gian kết thúc</label>
+            <input asp-for="EndTime" type="datetime-local" class="form-control" />
+            <span asp-validation-for="EndTime" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-success">💾 Lưu</button>
+    </form>
+</div>

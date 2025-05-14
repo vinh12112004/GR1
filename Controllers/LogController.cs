@@ -1,8 +1,10 @@
 using GR1.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace GR1.Controllers;
+[Authorize]
 public class LogController : Controller{
     private readonly AppDbContext _context;
     public LogController(AppDbContext context){

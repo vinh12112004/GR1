@@ -1,0 +1,35 @@
+@model IEnumerable<GR1.Models.ClassModel>
+
+@{
+    ViewData["Title"] = "Danh sách lớp học";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">@ViewData["Title"]</h2>
+    <a class="btn btn-success mb-4" href="/Class/Create">➕ Thêm lớp học</a>
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover table-bordered align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">Tên lớp</th>
+                            <th scope="col">Phòng học</th>
+                            <th scope="col">Thời gian</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var c in Model)
+                        {
+                            <tr>
+                                <td>@c.ClassName</td>
+                                <td>@c.Room</td>
+                                <td>@c.StartTime.ToString("HH:mm") - @c.EndTime.ToString("HH:mm")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

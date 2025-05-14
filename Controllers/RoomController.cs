@@ -1,9 +1,12 @@
 using System.Threading.Tasks;
 using GR1.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace GR1.Controllers;
+
+[Authorize]
 public class RoomController : Controller {
     private readonly AppDbContext _context;
     public RoomController(AppDbContext context){

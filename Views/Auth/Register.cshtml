@@ -1,0 +1,31 @@
+@{
+    ViewData["Title"] = "Đăng ký";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center">Đăng ký</h2>
+
+    <form method="post" asp-action="Register" class="mt-4">
+        <div class="mb-3">
+            <label for="fullname" class="form-label">Họ và tên:</label>
+            <input type="text" id="fullname" name="fullname" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" id="email" name="email" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Mật khẩu:</label>
+            <input type="password" id="password" name="password" class="form-control" required />
+        </div>
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary">Đăng ký</button>
+            <a asp-action="Login" class="btn btn-secondary">Quay lại Đăng nhập</a>
+        </div>
+    </form>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger mt-3">@ViewBag.Error</div>
+    }
+</div>

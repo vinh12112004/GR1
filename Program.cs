@@ -2,6 +2,8 @@ using GR1.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -19,6 +21,8 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 
 var app = builder.Build();
 
+app.UseAuthentication();
+app.UseAuthorization();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -53,5 +57,7 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Student}/{action=Index}/{id?}")
     .WithStaticAssets();
-
+app.MapControllerRoute(
+    name: "class",
+    pattern: "{controller=Class}/{action=Index}/{id?}");
 app.Run();
