@@ -14,4 +14,6 @@ public class StudentModel
     [Display(Name = "Họ và tên")]
     public string FullName { get; set; }
     public ICollection<LogModel> Logs { get; set; }
+
+    public ICollection<StudentClassModel> StudentClasses { get; set; }
 }

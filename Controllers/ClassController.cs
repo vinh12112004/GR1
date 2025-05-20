@@ -66,4 +66,63 @@ public class ClassController : Controller
         }
         return View(classModel);
     }
+    [HttpGet]
+    public async Task<IActionResult> Detail(int id)
+    {
+        var classModel = await _context.Classes
+            .Include(c => c.Teacher)
+            .FirstOrDefaultAsync(c => c.Id == id);
+
+        if (classModel == null)
+        {
+            return NotFound();
+        }
+
+        // Kiểm tra quyền: chỉ giáo viên chủ lớp mới xem được
+        var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+        if (classModel.TeacherId != userId)
+        {
+            return Forbid();
+        }
+        // Lấy RoomCode từ RoomModel nếu cần
+        var room = await _context.Rooms.FirstOrDefaultAsync(r => r.RoomCode == classModel.RoomCode);
+        int? roomCode = room?.RoomCode;
+
+        // Lấy các log phù hợp
+        var logs = await _context.Logs
+            .Include(l => l.Student)
+            .Include(l => l.Room)
+            .Where(l =>
+                l.Timestamp >= classModel.StartTime &&
+                l.Timestamp <= classModel.EndTime &&
+                l.RoomCode == roomCode)
+            .ToListAsync();
+
+        ViewBag.Logs = logs;
+        return View(classModel);
+    }
+
+    public async Task<IActionResult> Delete(int id)
+    {
+        var classModel = await _context.Classes.FindAsync(id);
+        if (classModel == null)
+        {
+            return NotFound();
+        }
+
+        // Kiểm tra quyền: chỉ giáo viên chủ lớp mới xóa được
+        var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+        if (classModel.TeacherId != userId)
+        {
+            return Forbid();
+        }
+
+        _context.Classes.Remove(classModel);
+        await _context.SaveChangesAsync();
+        return RedirectToAction("Index");
+    }
+
+    
+
+    
 }

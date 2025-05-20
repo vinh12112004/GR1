@@ -1,0 +1,64 @@
+@model GR1.Models.ClassModel
+
+@{
+    ViewData["Title"] = "Chi tiết lớp học";
+    var logs = ViewBag.Logs as List<GR1.Models.LogModel>;
+
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">@ViewData["Title"]</h2>
+    <div class="card shadow-sm" style="max-width: 500px;">
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-4">Tên lớp</dt>
+                <dd class="col-sm-8">@Model.ClassName</dd>
+
+                <dt class="col-sm-4">Phòng học</dt>
+                <dd class="col-sm-8">@Model.RoomCode</dd>
+
+                <dt class="col-sm-4">Thời gian bắt đầu</dt>
+                <dd class="col-sm-8">@Model.StartTime.ToString("dd/MM/yyyy HH:mm")</dd>
+
+                <dt class="col-sm-4">Thời gian kết thúc</dt>
+                <dd class="col-sm-8">@Model.EndTime.ToString("dd/MM/yyyy HH:mm")</dd>
+
+                <dt class="col-sm-4">Giáo viên</dt>
+                <dd class="col-sm-8">@Model.Teacher?.FullName</dd>
+            </dl>
+            <a class="btn btn-secondary" href="@Url.Action("Index", "Class")">⬅ Quay lại</a>
+            <a class="btn btn-info ms-2" href="@Url.Action("Index", "ClassStudent", new { id = Model.Id })">👥 Quản lý sinh viên</a>            
+        </div>
+    </div>
+</div>
+@if (logs != null && logs.Any())
+{
+    <h4 class="mt-4">Bảng log điểm danh</h4>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Mã sinh viên</th>
+                    <th>Họ tên</th>
+                    <th>Trạng thái</th>
+                    <th>Thời gian</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var log in logs)
+                {
+                    <tr>
+                        <td>@log.StudentCode</td>
+                        <td>@log.Student?.FullName</td>
+                        <td>@log.Status</td>
+                        <td>@log.Timestamp.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <div class="alert alert-info mt-4">Không có log điểm danh nào trong thời gian này.</div>
+}

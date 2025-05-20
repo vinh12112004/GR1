@@ -13,6 +13,7 @@ public class AppDbContext : DbContext
     public DbSet<LogModel> Logs { get; set; }
     public DbSet<UserModel> Users { get; set; } 
     public DbSet<ClassModel> Classes { get; set; }
+    public DbSet<StudentClassModel> StudentClasses { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -30,7 +31,7 @@ public class AppDbContext : DbContext
             .WithMany(r => r.Logs)  // Một phòng có thể có nhiều bản ghi Log
             .HasForeignKey(a => a.RoomCode)
             .OnDelete(DeleteBehavior.Restrict);
-            
+
         modelBuilder.Entity<ClassModel>()
             .HasOne(c => c.Teacher)
             .WithMany() // Một giáo viên có thể dạy nhiều lớp

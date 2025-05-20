@@ -1,0 +1,76 @@
+@model IEnumerable<GR1.Models.StudentClassModel>
+@{
+    ViewData["Title"] = "Danh sách sinh viên";
+    var idStudenClass = ViewBag.id;
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">@ViewData["Title"]</h2>
+
+    <!-- Search Form -->
+    <form method="get" asp-action="Index" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="StudentCodeorFullName" class="form-control" placeholder="Tìm theo tên hoặc mã sinh viên..." aria-label="Tìm kiếm sinh viên" />
+            <button type="submit" class="btn btn-primary">Tìm</button>
+        </div>
+    </form>
+
+    <!-- Add Student Button -->
+    <a class="btn btn-success mb-4" href="@Url.Action("Create", "ClassStudent", new { id = @idStudenClass  })">➕ Thêm sinh viên</a>
+
+    <!-- Card for Table -->
+    <div class="card shadow-sm">
+        <div class="card-body">
+            @if (!Model.Any())
+            {
+                <div class="alert alert-info text-center" role="alert">
+                    Hiện tại không có sinh viên nào.
+                </div>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover table-bordered align-middle">
+                        <thead class="table-dark">
+                            <tr>
+                                <th scope="col">Mã SV</th>
+                                <th scope="col">Họ tên</th>
+                                <th scope="col">Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var sc in Model)
+                            {
+                                <tr>
+                                    <td>@sc.Student.StudentCode</td>
+                                    <td>@sc.Student.FullName</td>
+                                    <td>
+                                        <a onclick="return confirm('Bạn có chắc chắn muốn xoá sinh viên này khỏi lớp?');" href="@Url.Action("Delete", "ClassStudent", new {id = @idStudenClass, StudentCode = sc.StudentCode })" class="btn btn-danger btn-sm">Xóa</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Đảm bảo bảng có thanh cuộn dọc */
+    .table-responsive {
+        max-height: 500px; /* Chiều cao tối đa của bảng */
+        overflow-y: auto; /* Thanh cuộn dọc */
+        position: relative; /* Giữ header cố định */
+    }
+
+    /* Cố định header bảng */
+    .table thead th {
+        position: sticky;
+        top: 0;
+        background: #343a40; /* Màu nền của header */
+        color: white;
+        z-index: 1;
+    }
+</style>

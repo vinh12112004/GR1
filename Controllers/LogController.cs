@@ -43,6 +43,7 @@ public class LogController : Controller{
     [HttpPost]
     [Route("api/log")]
     [IgnoreAntiforgeryToken]
+    [AllowAnonymous]
     public async Task<IActionResult> ReceiveLog([FromBody] LogDTO log)
     {
         if (!ModelState.IsValid)
@@ -61,7 +62,8 @@ public class LogController : Controller{
             // Có thể thông báo lỗi cho người dùng hoặc thêm mới sinh viên
             return BadRequest("StudentCode không tồn tại trong hệ thống.");
         }
-        try {
+        try
+        {
             _context.Logs.Add(newLog);
             await _context.SaveChangesAsync();
             return Ok(new { message = "Log ghi thành công" });
@@ -71,9 +73,9 @@ public class LogController : Controller{
             ModelState.AddModelError("", "Lỗi khi update dữ liệu: " + ex.Message);
             return BadRequest();
         }
-        
 
-        
+
+
     }
 }
 

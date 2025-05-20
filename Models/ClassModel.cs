@@ -19,8 +19,7 @@ public class ClassModel
     public int TeacherId { get; set; } // Khóa ngoại liên kết với UserModel
 
     [Required]
-    [MaxLength(50)]
-    public string Room { get; set; } // Phòng học
+    public int RoomCode { get; set; } // Phòng học
 
     [Required]
     public DateTime StartTime { get; set; } // Thời gian bắt đầu
@@ -29,4 +28,5 @@ public class ClassModel
     public DateTime EndTime { get; set; } // Thời gian kết thúc
     [ValidateNever]
     public UserModel? Teacher { get; set; } // Navigation property
+    public ICollection<StudentClassModel> StudentClasses { get; set; }
 }
